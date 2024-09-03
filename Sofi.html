@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>כלי בינה מלאכותית</title>
+    <style>
+
+
+         body {
+
+
+            font-family: 'Assistant', sans-serif;
+            background-image: url(https://i.postimg.cc/fTk3sJnZ/3840-x-1920-px-2.png);
+            background-size: cover; /* מבטיח שהתמונה תכסה את כל המסך מבלי להיות מוחתכת */
+   	      background-position: center; /* ממרכזת את התמונה במרכז המסך */
+                   background-repeat: no-repeat; /* דואג שהתמונה לא תחזור על עצמה */
+                   background-attachment: fixed; /* נעול את התמונה כך שלא תזוז עם גלילת הדף */
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 4rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 800px;
+
+        }
+
+
+
+
+       h1 {
+    color: white; /* כחול כהה */
+    font-family: 'Assistant Bold', sans-serif;
+    font-size: 6em;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+        }
+       .links-section {
+    display: flex;
+    flex-direction: column; /* Ensures vertical stacking */
+    align-items: center; /* Centers items horizontally, adjust as needed */
+    width: 100%; /* Adjust based on the overall container width */
+}
+
+        .category {
+    background: linear-gradient(135deg, #020111, #0A4A68); /* צבעים המותאמים לגרדיאנט */
+            border-radius: 10px;
+            padding: 1.3rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .category h2 {
+            margin-top: 0;
+            color: background-color: rgba(29, 53, 87, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+color:white;
+        }
+        .link-button {
+    position: relative; /* Needed for absolute positioning of the tooltip */
+    display: block;
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #3B82F6, #9333EA); /* Gradient צבעים */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    transition: all 0.3s ease;
+  margin-left: auto; /* יישור אוטומטי למרכז */
+    margin-right: auto; /* יישור אוטומטי למרכז */
+    width: calc(100% - 40px); /* שינוי: מחסיר 40 פיקסלים מהרוחב המלא */
+    white-space: normal; /* מאפשר לטקסט לעבור לשורה הבאה במקרה הצורך */
+height: auto; /* מאפשר לכפתור להתרחב בהתאם לתוכן */
+    padding: 10px 20px; /* עדכון הפדינג כדי לוודא שהכפתור לא צפוף מדי */
+   
+
+}
+
+.link-button::after {
+    content: attr(data-tooltip); /* Uses the data-tooltip attribute to get the text */
+    visibility: hidden;
+    width: 300px; /* Adjust width automatically based on content */
+    max-width: 100%; /* Ensures tooltip does not exceed the element width */
+    white-space: normal; /* Prevents text from wrapping */
+    background-color: white;
+    color: black;
+    text-align: right;
+    border-radius: 10px;
+    padding: 10px 40px; /* Provides padding around the text */
+    position: absolute;
+    z-index: 9999;
+    top: -100% ; /* Positions the tooltip just below the link */
+    left: 50%;
+    transform: translateX(-50%); /* Centers the tooltip */
+    transition: visibility 0.2s, opacity 0.2s ease-in-out;
+    opacity: 0;
+    overflow: visible; /* Prevents content from spilling outside the box */
+font-size:1rem;
+}
+
+.link-button:hover::after {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+	.category-content {
+    max-height: 0;
+    overflow: hidden;
+    overflow-y: visible; /* ודא שהטקסט יוצג במלואו */
+
+    transition: max-height 0.6s ease-in-out;
+}
+
+.category h2 {
+    cursor: pointer;
+    position: relative;
+    padding-right: 30px; /* Space for the arrow icon */
+    margin-bottom: 10px; /* הפחתת המרחק מהכותרת לתוכן */
+  font-weight: 600;
+    font-size: 1.6rem;
+/
+
+
+}
+
+.category h2::after {
+    content: "";
+    display: block;
+    width: 20px; /* אני מניח שזה הגודל של האייקון */
+    height: 20px;
+    background-image: url('https://i.postimg.cc/pVqYs1Nr/Heading.png'); /* הכנס את ה-URL של האייקון */
+    background-size: cover;
+    position: absolute;
+    right: 0px; /* יכול להשתנות לפי הגדרת המרחק שלך מהטקסט */
+    top: 50%;
+    transform: translateY(-50%); /* ממרכז את האייקון ורטיקלית */
+    transition: transform 0.3s ease-in-out;
+}
+
+.category.active h2::after {
+    transform: translateY(-50%) rotate(-90deg); /* סיבוב האייקון כאשר הקטגוריה פתוחה */
+}
+
+.category.active .category-content {
+    max-height: 1000px; /* Adjust this value based on the maximum content size you expect */
+}
+#perplexity-tooltip::after {
+    top: auto; /* מבטלים את ההגדרה הקודמת של top */
+    bottom: 100%; /* ממקם את הפופאפ מעל הקישור */
+    left: 50%;
+ max-height: none;
+    overflow-y: auto; /* מאפשר גלילה אם יש צורך */
+
+    transform: translateX(-50%); /* ממרכז את הפופאפ ביחס לקישור */
+}
+
+.category p { 
+    color: white; /* צבע לבן */
+    font-size: 1rem; /* אפשר לשנות גם את הגודל אם יש צורך */
+    margin: 0.5rem 0 1rem; /* מרווחים מעל ומתחת לטקסט */
+}
+
+
+    </style>
+
+
+</head>
+<body>
+    <div class="container">
+        <h1>כלי בינה מלאכותית</h1>
+        <div class="links-section">
+            <div class="category">
+                <h2 onclick="toggleCategory(this)">מודלי שפה</h2>
+                <div class="category-content">
+                   <p>מודלי שפה מובילים שבאמצעותם תוכלו לשפר את הפרודוקטיביות בעבודה ובחיי היום יום. המלצה- קצב ההתקדמות הוא בגדר לא נורמלי והיתרונות משתנים לכאן ולכאן בכל עדכון, מומלץ תמיד לנסות את אותו הפרומפט לפחות בשני מודלים ולהשוות.</p>
+				<a href="https://chatgpt.com/" target="_blank" class="link-button" data-tooltip="מודל השפה הוותיק ביותר של חברת OpenAI. באמצעותו תוכלו לכתוב תוכן, קוד, לחפש באינטרנט, לנתח נתונים, להעלאות קבצים וליצור תמונות. חינמי עם מגבלת הודעות.">ChatGPT</a>
+
+
+                    <a href="https://claude.ai/" target="_blank" class="link-button" data-tooltip="  המתחרה של ChatGPT והוקם על ידי יוצאי חברת OpenAI ,היתרון הוא בכתיבת התוכן, הבנת העברית (מצוין!) ויצירתיות. חינמי עם מגבלת הודעות (הרבה פחות מג'יפיטי) ">Claude</a>
+                    <a href="https://gemini.google.com/"  target="_blank" class="link-button" data-tooltip="מודל השפה של חברת Google. לטעמי המודל הכי פחות מוצלח בהשוואה לקודמים. ">Gemini</a>
+                    <a href="https://groq.com/" target="_blank" class="link-button" data-tooltip="Groq provides robust AI solutions for complex computational needs.">Groq</a>
+                    <a href="https://pi.ai/onboarding"target="_blank" class="link-button" data-tooltip="PI helps in automating processes with its AI-driven platform.">PI</a>
+		   <a href="https://www.perplexity.ai/" target="_blank" class="link-button" data-tooltip="Perplexity AI offers a new way to interact with AI, providing deep insights and answers." id="perplexity-tooltip">Perplexity AI</a>
+
+
+                </div>
+            </div>
+
+            <div class="category">
+                <h2 onclick="toggleCategory(this)">יצירת תמונות</h2>
+                <div class="category-content">
+                    <p>כלי ליצירת תמונות על פי טקסט ותיאורים.</p>
+        <a href="https://ideogram.ai/" target="_blank" class="link-button" data-tooltip="Ideogram allows you to generate images based on textual descriptions, utilizing advanced AI techniques.">Ideogram</a>
+        <a href="https://www.midjourney.com/explore?tab=hot" target="_blank" class="link-button" data-tooltip="Midjourney offers an intuitive platform to create detailed and artistic images from simple descriptions.">Midjourney</a>
+        <a href="https://fluxpro.art/" target="_blank" class="link-button" data-tooltip="Flux Pro is a professional tool for digital artists and designers to create complex image compositions with AI assistance.">Flux Pro</a>
+
+<a href="https://app.leonardo.ai/auth/login?callbackUrl=%2F" target="_blank" class="link-button" data-tooltip="Leonardo is a professional tool for digital artists and designers to create complex image compositions with AI assistance.">Leonardo</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2 onclick="toggleCategory(this)">יצירת מוזיקה וסאונד</h2>
+                <div class="category-content">
+                    <p>כלי ליצירת מוזיקה בעזרת בינה מלאכותית.</p>
+        <a href="https://suno.com/" target="_blank" class="link-button" data-tooltip="Suno enables musicians to create and manipulate music tracks using AI, offering new layers of creativity.">Suno</a>
+        <a href="https://www.udio.com/" target="_blank" class="link-button" data-tooltip="Udio is a revolutionary platform that uses AI to generate music automatically, suitable for various applications.">Udio</a>
+        <a href="https://loudme.ai/" target="_blank" class="link-button" data-tooltip="Loudme helps artists harness the power of AI to create unique soundscapes and beats, pushing the boundaries of music production.">Loudme</a>
+  <a href="https://elevenlabs.io/" target="_blank" class="link-button" data-tooltip="Loudme helps artists harness the power of AI to create unique soundscapes and beats, pushing the boundaries of music production.">ElevenLabs</a>
+ <a href="https://www.kits.ai//" target="_blank" class="link-button" data-tooltip="Loudme helps artists harness the power of AI to create unique soundscapes and beats, pushing the boundaries of music production.">Kits AI</a>
+                </div>
+            </div>
+
+<!-- הוסף כאן את הקטגוריה החדשה -->
+<div class="category">
+    <h2 onclick="toggleCategory(this)">יצירת וידאו</h2>
+    <div class="category-content">
+        <p>הכלים המתקדמים ביותר היום ליצירת וידאו מטקסט או תמונה.</p>
+        <a href="https://lumalabs.ai/dream-machine" class="link-button" data-tooltip="קהילת המומחים הראשונה Luma AI">Luma AI</a>
+        <a href="https://klingai.com/" target="_blank" class="link-button" data-tooltip="קהילה מובילה לחובבי Klingai">KlingAI</a>
+        <a href="https://runwayml.com/"_blank" class="link-button" data-tooltip="מקום מפגש לאנשי עסקים ויזמים.">Runway</a>
+    </div>
+</div>
+
+
+            <div class="category">
+                <h2 onclick="toggleCategory(this)">אימון מודל</h2>
+                <div class="category-content">
+                    <p>כלים למתקדמים- אימון מודל של דמות סגנון ועוד.</p>
+        <a href="https://www.astria.ai/" target="_blank" class="link-button" data-tooltip="Astria provides advanced tools for creating and training AI models tailored to specific tasks and industries.">Astria</a>
+        <a href="https://fal.ai/models/fal-ai/flux-general" target="_blank" class="link-button" data-tooltip="Fal.AI - Flux General allows users to train custom AI models with high efficiency and scalability.">Fal.AI - Flux General</a>
+
+
+        <a href="https://replicate.com/" target="_blank" class="link-button" data-tooltip="Replicate makes it easy to deploy, train, and manage machine learning models at scale, with a focus on reproducibility and collaboration.">Replicate</a>
+
+   <a href="https://app.artflow.ai/ref/eaa7e32396" target="_blank" class="link-button" data-tooltip="Replicate makes it easy to deploy, train, and manage machine learning models at scale, with a focus on reproducibility and collaboration.">Artflow</a>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="category">
+                <h2 onclick="toggleCategory(this)"> תמלול שמע</h2>
+                <div class="category-content">
+                    <p>Ivrit.ai.</p>
+                    <a href="https://www.ivrit.ai/he/174-2/" class="link-button" target="_blank">Ivrit.ai</a>
+                </div>
+            </div>
+
+            <div class="category">
+                <h2 onclick="toggleCategory(this)">מחקר ולמידה</h2>
+                <div class="category-content">
+                    <p>כלי שמאפשר להעלות קבצים שונים, לעבוד עליהם ולנתח אותם בעזרת בינה מלאכותית, דרך ממשק פשוט וידידותי למשתמש.</p>
+                    <a href="https://notebooklm.google.com/" class="link-button" target="_blank">Google Notebook</a>
+                </div>
+            </div>
+
+<!-- הוסף כאן את הקטגוריה החדשה -->
+<div class="category">
+    <h2 onclick="toggleCategory(this)">הטמעת כתוביות</h2>
+    <div class="category-content">
+        <p>כלים שיאפשרו לכם להטמיע כתוביות לכל סרטון.</p>
+        <a href="https://desktop.captions.ai/login" target="_blank" class="link-button" data-tooltip="קהילת Captions">Captions AI</a>
+
+  </div>
+            </div>
+
+
+<!-- הוסף כאן את הקטגוריה החדשה -->
+<div class="category">
+    <h2 onclick="toggleCategory(this)">יצירת אוואטרים ודיבוב</h2>
+    <div class="category-content">
+        <p>מבחר קהילות מומלצות להצטרפות בנושאים שונים.</p>
+        <a href="https://www.d-id.com//" target="_blank" class="link-button" data-tooltip="קהילת המומחים D-ID">D-ID</a>
+        <a href="https://app.heygen.com/" target="_blank" class="link-button" data-tooltip="קהילה מובילה לחובבי HeyGen">HeyGen</a>
+  
+</div>
+            </div>
+
+
+<!-- הוסף כאן את הקטגוריה החדשה -->
+<div class="category">
+    <h2 onclick="toggleCategory(this)">שיפור פרודקטיביות</h2>
+    <div class="category-content">
+        <p>מבחר קהילות מומלצות להצטרפות בנושאים שונים.</p>
+        <a href="https://gamma.app/" target="_blank" class="link-button" data-tooltip="קהילת המומחים D-ID">Gamma AI</a>
+        <a href="https://www.timeos.ai/?via=maxim" target="_blank" class="link-button" data-tooltip="קהילה מובילה לחובבי HeyGen">TimeOS</a>
+  
+</div>
+            </div>
+
+
+<!-- הוסף כאן את הקטגוריה החדשה -->
+<div class="category">
+    <h2 onclick="toggleCategory(this)">קהילות מומלצות</h2>
+    <div class="category-content">
+        <p>מבחר קהילות מומלצות להצטרפות בנושאים שונים.</p>
+        <a href="https://community1.example.com/" target="_blank" class="link-button" data-tooltip="קהילת המומחים הראשונה בתחום התוכנה.">קהילת תוכנה</a>
+        <a href="https://community2.example.com/" target="_blank" class="link-button" data-tooltip="קהילה מובילה לחובבי האומנות והיצירה.">קהילת אמנות</a>
+        <a href="https://community3.example.com/" target="_blank" class="link-button" data-tooltip="מקום מפגש לאנשי עסקים ויזמים.">קהילת יזמות</a>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+
+    <script>
+    function toggleCategory(element) {
+        var content = element.nextElementSibling;
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    }
+
+document.querySelectorAll('.category h2').forEach(h2 => {
+    h2.addEventListener('click', function() {
+        this.parentNode.classList.toggle('active'); // מוסיף או מסיר את הכיתה 'active' לאלמנט האב
+        var content = this.nextElementSibling;
+        if (this.parentNode.classList.contains('active')) {
+            content.style.maxHeight = content.scrollHeight + "px";
+        } else {
+            content.style.maxHeight = null;
+        }
+    });
+});
+
+
+
+    </script>
+</body>
+</html>
